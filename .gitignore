@@ -1,0 +1,12 @@
+#build files
+target/
+
+#intellij files
+.jpb/
+
+.idea/
+
+#deployment files
+*.war
+
+*.iml
