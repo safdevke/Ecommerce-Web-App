@@ -2,21 +2,23 @@ package dto;
 
 import java.io.Serializable;
 
-public class GenericResponse {
+public class LoginResponse implements Serializable {
 
     private boolean success = true;
 
     private String message = "Done";
 
-    public GenericResponse() {}
+    private String token;
 
-    public GenericResponse(boolean success) {
-        this.success = success;
-    }
+    public LoginResponse() {}
 
-    public GenericResponse(boolean success, String message) {
+    public LoginResponse(boolean success, String message) {
         this.success = success;
         this.message = message;
+    }
+
+    public LoginResponse(String token) {
+        this.token = token;
     }
 
     public boolean isSuccess() {
@@ -35,5 +37,11 @@ public class GenericResponse {
         this.message = message;
     }
 
-}
+    public String getToken() {
+        return token;
+    }
 
+    public void setToken(String token) {
+        this.token = token;
+    }
+}

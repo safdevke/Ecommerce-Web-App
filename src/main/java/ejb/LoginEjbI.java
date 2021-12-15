@@ -1,7 +1,11 @@
-//package ejb;
-//
-//import java.util.Map;
-//
-//public interface LoginEjbI {
-//    LoginResponse validate(Map<String, String[]> params);
-//}
+package ejb;
+
+import dto.LoginResponse;
+import model.Customer;
+
+import java.util.Map;
+
+public interface LoginEjbI {
+
+    LoginResponse validateLoginCredentials(Customer customer);
+}

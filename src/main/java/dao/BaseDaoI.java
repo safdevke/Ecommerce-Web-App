@@ -19,4 +19,5 @@ public interface BaseDaoI<T> {
     void delete(final T entity);
 
     void deleteById(final int entityId);
+
 }

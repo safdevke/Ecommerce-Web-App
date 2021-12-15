@@ -1,6 +1,6 @@
 package ejb;
 
-import dao.BaseDaoI;
+import dao.GenericDaoI;
 import model.Product;
 
 import javax.ejb.Stateless;
@@ -11,17 +11,16 @@ import java.util.List;
 public class ProductEjb implements ProductEjbI {
 
     @Inject
-    BaseDaoI productDao;
+    GenericDaoI dao;
 
     public List<Product> listAll() {
-        productDao.setClazz(Product.class);
-        return productDao.findAll();
+        dao.setClazz(Product.class);
+        return dao.findAll();
     }
 
     public Product findProduct(int id) {
-        productDao.setClazz(Product.class);
-        return (Product) productDao.findById(id);
+        dao.setClazz(Product.class);
+        return (Product) dao.findById(id);
     }
-
 
 }

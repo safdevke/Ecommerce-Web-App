@@ -8,6 +8,6 @@ public interface TokenEjbI {
 
     RegisterResponse generateNewToken(Customer customer);
 
-    GenericResponse validateRegistrationToken();
+    GenericResponse validateCustomerToken(String token);
 
 }

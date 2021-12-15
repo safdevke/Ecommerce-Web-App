@@ -1,9 +1,12 @@
 package services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import model.Customer;
-import model.Secret;
+import org.checkerframework.checker.units.qual.C;
 import utility.Consts;
 
 import java.nio.charset.StandardCharsets;
@@ -15,6 +18,8 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class JwtTokenProvider implements JwtTokenProviderI {
+
+    private ObjectMapper jsonMapper = new ObjectMapper();
 
     public HashMap<String,Object> issueToken(Customer customer, boolean newCustomer) {
 
@@ -46,14 +51,14 @@ public class JwtTokenProvider implements JwtTokenProviderI {
                 .compact();
 
         map.put("token", jwtToken);
-        map.put("secret", new String(secret));
+        map.put("secret", secret);
         return map;
     }
 
     public boolean validateToken(Customer customer) {
         try {
             Jws<Claims> result = Jwts.parserBuilder()
-                    .setSigningKey(Keys.hmacShaKeyFor(customer.getSecret().getBytes()))
+                    .setSigningKey(Keys.hmacShaKeyFor(customer.getSecret()))
                     .build()
                     .parseClaimsJws(Consts.token);
         } catch (ExpiredJwtException e) {
@@ -62,6 +67,21 @@ public class JwtTokenProvider implements JwtTokenProviderI {
             throw e;
         }
         return true;
+    }
+
+    public Customer decodeToken(String token) {
+        String[] arr = token.split("\\.");
+        Base64.Decoder decoder = Base64.getDecoder();
+        String payload = new String(decoder.decode(arr[1]));
+        Customer customer = new Customer();
+        try {
+            JsonNode node = jsonMapper.readTree(payload);
+            int id = node.get("id").asInt();
+            customer.setCustomerId(id);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return customer;
     }
 
 }

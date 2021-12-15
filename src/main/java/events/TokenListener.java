@@ -2,7 +2,6 @@ package events;
 
 import utility.Consts;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.enterprise.event.Observes;
 

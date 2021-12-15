@@ -2,35 +2,33 @@
 if (document.readyState == 'loading') {
     document.addEventListener('DOMContentLoaded', ready)
 } else {
-    
     ready()
 }
 
 function ready() {
 
-    register();
+    login();
 
 }
 
-function register() {
+function login() {
 
-    var registerButton = document.getElementsByClassName('auth-form-btn')[0];
-    registerButton.addEventListener('click', onRegisterClick);
+    var loginButton = document.getElementsByClassName('auth-form-btn')[0];
+    loginButton.addEventListener('click', onLoginClick);
 
     var email = document.getElementById('inputEmail');
-    var password = document.getElementById('inputPassword1');
-    var confirmPassword = document.getElementById('inputPassword2');
+    var password = document.getElementById('inputPassword');
 
 
 
-    function onRegisterClick(event) {
+    function onLoginClick(event) {
 
         event.preventDefault();
 
         var emailReg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         var passReg = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%?=*&/]).{5,8})/;
 
-        if (email.value == '' || password.value == '' || confirmPassword.value == '') {
+        if (email.value == '' || password.value == '') {
             alert('Please fill in all fields');
             return;
         }
@@ -40,29 +38,14 @@ function register() {
             return;
         }
 
-        if (!password.value.match(passReg)) {
-            alert('Password must be at least 5 characters long, contain at least one uppercase letter,'+
-            'one lowercase letter, one number and one special character');
-            password.value = '';
-            confirmPassword.value = '';
-            return false;
-        }
-
-        if (password.value != confirmPassword.value) {
-            alert('Passwords do not match');
-            password.value = '';
-            confirmPassword.value = '';
-            return false;
-        }
-
-        registerButton.disabled = true;
+        loginButton.disabled = true;
 
         var user = JSON.stringify({
             email: email.value,
             password: password.value
         });
 
-        ajaxReq('http://omoka.ml/api/register', 'POST', user, makeRequest);
+        ajaxReq('http://omoka.ml/api/login', 'POST', user, makeRequest);
 
         function makeRequest(response, status) {
 
@@ -70,14 +53,20 @@ function register() {
 
             if (!status == 200) {
                 alert('Error: ' + response.message);
-                registerButton.disabled = false;
+                loginButton.disabled = false;
                 return;
             }
 
-            alert(response.message);
-            registerButton.disabled = false;
+            if (!response.success) {
+                alert(response.message);
+                loginButton.disabled = false;
+                return;
+            }
+            else {
+                window.location.href = 'index.html';
+                return;
+            }
         }
-        
     }
 }
 

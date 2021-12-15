@@ -29,8 +29,7 @@ public class Customer {
     @Column(name = "credit_card")
     String creditCard;
 
-    @Column(length = 1000)
-    String secret;
+    byte[] secret;
 
     @Type(type = "true_false") // saves T or F values in db
     boolean accountEnabled;
@@ -113,11 +112,11 @@ public class Customer {
         this.email = email;
     }
 
-    public String getSecret() {
+    public byte[] getSecret() {
         return secret;
     }
 
-    public void setSecret(String secret) {
+    public void setSecret(byte[] secret) {
         this.secret = secret;
     }
 

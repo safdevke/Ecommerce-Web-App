@@ -11,4 +11,5 @@ public interface JwtTokenProviderI {
 
     boolean validateToken(Customer customer);
 
+    Customer decodeToken(String token);
 }

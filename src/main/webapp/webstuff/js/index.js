@@ -91,7 +91,7 @@ function onCartClick (event) {
         document.write("   	 <\/div>");
         document.write("   	 <button class=\"button-checkout\">Checkout<\/button><\/div>");
         document.write("   	 <div class=\"back\">");
-        document.write("   	 <a href=\"../minics-html/index.html\"><button class=\"button-back\">Back<\/button></a><\/div>");
+        document.write("   	 <a href=\"../webstuff/index.html\"><button class=\"button-back\">Back<\/button></a><\/div>");
         document.write("   <\/div>");
         document.write("   <!-- index -->");
         document.write("  <script src=\"index.js\" async><\/script>");
@@ -270,7 +270,7 @@ function onCartClick (event) {
         }
     }
 
-    var url = 'http://localhost:8080/Ecommerce/api/products/all';
+    var url = 'http://omoka.ml/api/products/all';
     var method = 'GET';
     var data = null;
     ajaxReq(url, method, data, cartItems);
@@ -340,7 +340,7 @@ function populateProducts(product, num) {
         }
     }
 
-    var url = 'http://localhost:8080/Ecommerce/api/products/all';
+    var url = 'http://omoka.ml/api/products/all';
     var method = 'GET';
     var data = null;
     ajaxReq(url, method, data, productJSON);

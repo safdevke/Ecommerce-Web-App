@@ -10,7 +10,11 @@ public class RegisterResponse implements Serializable {
 
     private String message = "Registration successful";
 
-    public RegisterResponse() {};
+    public RegisterResponse() {}
+
+    public RegisterResponse(String message) {
+        this.message = message;
+    }
 
     public RegisterResponse(boolean emailSent) {
         this.emailSent = emailSent;

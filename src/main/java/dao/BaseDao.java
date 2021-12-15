@@ -9,8 +9,7 @@ public abstract class BaseDao<T> implements BaseDaoI<T> {
     private Class<T> clazz;
 
     @PersistenceContext
-    private EntityManager entityManager;
-
+    protected EntityManager entityManager;
 
     public void setClazz(Class clazzToSet) {
         this.clazz = clazzToSet;
@@ -23,7 +22,8 @@ public abstract class BaseDao<T> implements BaseDaoI<T> {
     }
 
     public List<T> findAll() {
-        return entityManager.createQuery("from " + clazz.getName()).getResultList();
+        List<T> result = entityManager.createQuery("from " + clazz.getName()).getResultList();
+        return result;
     }
 
     public T create(final Object entity) {

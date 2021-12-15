@@ -28,7 +28,7 @@
             <property name="format_sql" value="false" />
 
             <!-- update schema on SessionFactory build -->
-            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
             <!--<property name="hibernate.hbm2ddl.auto" value="" />-->
 
             <!-- flush mysql to clear error connections -->

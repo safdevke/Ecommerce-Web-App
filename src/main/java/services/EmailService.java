@@ -41,7 +41,7 @@ EmailService implements EmailServiceI {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject("Ecommerce Site. Activate your Account");
 
-            String url = "\"http://localhost:8080/Ecommerce/register\"";
+            String url = "\"omoka.ml/register\"";
 
             String msg =
                     "<h3>Please click on this link to activate your account!" +

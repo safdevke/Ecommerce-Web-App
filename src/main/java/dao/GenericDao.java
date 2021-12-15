@@ -11,14 +11,6 @@ import java.util.List;
 
 public class GenericDao<T> extends BaseDao<T> implements GenericDaoI<T> {
 
-
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    public Session getSession() {
-        return entityManager.unwrap(Session.class);
-    }
-
     @Override
     public List<T> findByColumn(Object entity, HashMap<String, String> items) {
         String columnName = "";
@@ -30,10 +22,8 @@ public class GenericDao<T> extends BaseDao<T> implements GenericDaoI<T> {
         }
 
         String hql = "FROM " +  entity.toString() + " E WHERE E." + columnName + " = :column_value";
-        Query query = getSession().createQuery(hql);
+        Query query = entityManager.createQuery(hql);
         query.setParameter("column_value", columnValue);
         return query.getResultList();
-
     }
-
 }

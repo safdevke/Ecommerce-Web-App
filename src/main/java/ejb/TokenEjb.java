@@ -30,12 +30,6 @@ public class TokenEjb implements TokenEjbI {
     @Inject
     JwtTokenProviderI jwtTokenProvider;
 
-    @Inject
-    Event<String> tokenEvent;
-
-    @Inject
-    Event<Integer> custIdEvent;
-
 
     public RegisterResponse generateNewToken(Customer customer) {
 
@@ -45,24 +39,24 @@ public class TokenEjb implements TokenEjbI {
         List<Customer> result = dao.findByColumn(customer, map);
 
         if (result.isEmpty()) {
-            return new RegisterResponse(true, false, "Customer doesn't exist! Please register first");
+            return new RegisterResponse(true, false, "User doesn't exist! Please register first");
         }
 
-        customer = registerEjb.issueRegistrationToken(customer);
+        customer = registerEjb.issueToken(customer);
         registerEjb.sendMail(customer);
 
         return new RegisterResponse(true,true,"New token generated. Check your email");
     }
 
-    public GenericResponse validateRegistrationToken() {
-        dao.setClazz(Customer.class);
-        Customer customer = (Customer) dao.findById(Consts.customerId);
-        if (!jwtTokenProvider.validateToken(customer)) {
-            return new GenericResponse(false, "Token Expired");
+    public GenericResponse validateCustomerToken(String token) {
+        Customer customer = jwtTokenProvider.decodeToken(token);
+        if (customer == null) {
+            return new GenericResponse(false, "Invalid token");
         }
-        customer.setAccountEnabled(true);
-        dao.update(customer);
-        return new GenericResponse();
+        customer = (Customer) dao.findById(customer.getCustomerId());
+        if (!jwtTokenProvider.validateToken(customer)) {
+            return new GenericResponse(false, "Token expired");
+        }
+        return new GenericResponse(true, "User validated successfully");
     }
-
 }
