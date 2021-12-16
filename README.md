@@ -5,7 +5,7 @@ An attempt at implementing a working e-commerce website.
 
 # Motivation
 
-The sole purpose behind building this project is to learn web app development using Java as the backend, write tests using Selenium and set up a server using Docker to host it.
+The sole purpose of making this project is to learn web app development using Java as the backend, write tests using Selenium and set up a server using Docker to host it.
 
 # Setup
 
@@ -70,11 +70,11 @@ Lastly, add a datasource to your standalone.xml located at
 
 ```
 
-Create a database ecommerce in your MySQL db_user. Start WildFly in standalone mode.
+Create a database ecommerce using your MySQL db_user. Start WildFly in standalone mode.
 
 # Usage
 
-A live demo is available at [omoka.ml](omoka.ml). The site will be temporarily unavailable from 17<sup>th</sup> December 2021. I haven't paid my WiFi :)
+A live demo is available at [omoka.ml](http://omoka.ml). The site will be temporarily unavailable from 17<sup>th</sup> December 2021. I haven't paid my WiFi :)
 
 # Improvements
 
