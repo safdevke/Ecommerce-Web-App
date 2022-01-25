@@ -74,8 +74,7 @@ Create a database ecommerce using your MySQL db_user. Start WildFly in standalon
 
 # Usage
 
-A live demo is available at [omoka.ml](http://omoka.ml). The site will be temporarily unavailable from 17<sup>th</sup> December 2021. I haven't paid my WiFi :)
-
+A live demo is available at [omoka.ml](http://omoka.ml).
 # Improvements
 
 <li> Add checkout and tracking capabilities
